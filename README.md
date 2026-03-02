@@ -19,18 +19,9 @@ Built for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), but wor
 
 - [Hyprland](https://hyprland.org/) (Wayland compositor)
 - Python 3.10+
-- System tools:
-  - `grim` — screenshots
-  - `hyprctl` — Hyprland IPC (comes with Hyprland)
-  - `wtype` — keyboard input
-  - `ydotool` — mouse click/scroll events
-  - `wl-copy` / `wl-paste` — clipboard (`wl-clipboard` package)
-  - `tesseract` — OCR text recognition (`tesseract` + `tesseract-data-eng` packages)
+- System tools: `grim`, `wtype`, `ydotool`, `wl-clipboard`, `tesseract`
 
-On Arch-based distros:
-```bash
-sudo pacman -S grim wtype ydotool wl-clipboard tesseract tesseract-data-eng
-```
+The install script checks for all of these and offers to install any that are missing.
 
 ## Installation
 
@@ -38,7 +29,13 @@ sudo pacman -S grim wtype ydotool wl-clipboard tesseract tesseract-data-eng
 curl -sSL https://raw.githubusercontent.com/alderban107/hyprland-mcp/main/install.sh | bash
 ```
 
-The install script checks for system dependencies, installs the package via pipx, and registers the MCP server with Claude Code. Restart Claude Code after installing.
+The install script handles everything automatically:
+1. Detects your package manager (pacman, apt, dnf, zypper, xbps, emerge, nix)
+2. Installs any missing system dependencies
+3. Installs hyprland-mcp via pipx
+4. Registers the MCP server with Claude Code
+
+Restart Claude Code after installing.
 
 Verify with `claude mcp list` — you should see `hyprland: ✓ Connected`.
 
