@@ -35,14 +35,22 @@ sudo pacman -S grim wtype ydotool wl-clipboard tesseract tesseract-data-eng
 ## Installation
 
 ```bash
+curl -sSL https://raw.githubusercontent.com/alderban107/hyprland-mcp/main/install.sh | bash
+```
+
+The install script checks for system dependencies, installs the package via pipx, and registers the MCP server with Claude Code. Restart Claude Code after installing.
+
+Verify with `claude mcp list` — you should see `hyprland: ✓ Connected`.
+
+<details>
+<summary>Manual installation</summary>
+
+```bash
 pipx install git+https://github.com/alderban107/hyprland-mcp.git
 claude mcp add --transport stdio --scope user hyprland -- hyprland-mcp
 ```
 
-That's it. Verify with `claude mcp list` — you should see `hyprland: ✓ Connected`.
-
-<details>
-<summary>Alternative: install from a local clone</summary>
+Or from a local clone:
 
 ```bash
 git clone https://github.com/alderban107/hyprland-mcp.git
