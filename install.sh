@@ -38,6 +38,9 @@ elif command -v zypper &>/dev/null; then
 elif command -v xbps-install &>/dev/null; then
     PM="xbps"
     PM_INSTALL="sudo xbps-install -y"
+elif command -v emerge &>/dev/null; then
+    PM="emerge"
+    PM_INSTALL="sudo emerge --ask --noreplace"
 elif command -v nix-env &>/dev/null; then
     PM="nix"
 fi
@@ -47,16 +50,35 @@ pkg_name() {
     local tool="$1"
     case "$tool" in
         wl-copy|wl-paste)
-            echo "wl-clipboard"
+            case "$PM" in
+                emerge) echo "gui-apps/wl-clipboard" ;;
+                *)      echo "wl-clipboard" ;;
+            esac
             ;;
         tesseract)
             case "$PM" in
-                apt)  echo "tesseract-ocr tesseract-ocr-eng" ;;
-                *)    echo "tesseract tesseract-data-eng" ;;
+                apt)     echo "tesseract-ocr tesseract-ocr-eng" ;;
+                emerge)  echo "app-text/tesseract" ;;
+                *)       echo "tesseract tesseract-data-eng" ;;
+            esac
+            ;;
+        grim)
+            case "$PM" in
+                emerge) echo "gui-apps/grim" ;;
+                *)      echo "grim" ;;
+            esac
+            ;;
+        wtype)
+            case "$PM" in
+                emerge) echo "gui-apps/wtype" ;;
+                *)      echo "wtype" ;;
             esac
             ;;
         ydotool)
-            echo "ydotool"
+            case "$PM" in
+                emerge) echo "gui-apps/ydotool" ;;
+                *)      echo "ydotool" ;;
+            esac
             ;;
         *)
             echo "$tool"
@@ -136,6 +158,7 @@ if ! command -v pipx &>/dev/null; then
         dnf)     PIPX_PKG="pipx" ;;
         zypper)  PIPX_PKG="python3-pipx" ;;
         xbps)    PIPX_PKG="pipx" ;;
+        emerge)  PIPX_PKG="dev-python/pipx" ;;
     esac
 
     if [ "$PM" = "nix" ]; then
