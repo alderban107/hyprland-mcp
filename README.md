@@ -35,25 +35,24 @@ sudo pacman -S grim wtype ydotool wl-clipboard tesseract tesseract-data-eng
 ## Installation
 
 ```bash
+pipx install git+https://github.com/alderban107/hyprland-mcp.git
+claude mcp add --transport stdio --scope user hyprland -- hyprland-mcp
+```
+
+That's it. Verify with `claude mcp list` — you should see `hyprland: ✓ Connected`.
+
+<details>
+<summary>Alternative: install from a local clone</summary>
+
+```bash
 git clone https://github.com/alderban107/hyprland-mcp.git
 cd hyprland-mcp
 python3 -m venv .venv
 .venv/bin/pip install -e .
-```
-
-### Register with Claude Code
-
-```bash
 claude mcp add --transport stdio --scope user hyprland -- /path/to/hyprland-mcp/.venv/bin/hyprland-mcp
 ```
 
-Or using the Python module directly:
-
-```bash
-claude mcp add --transport stdio --scope user hyprland -- /path/to/hyprland-mcp/.venv/bin/python3 -m hyprland_mcp.server
-```
-
-Verify with `claude mcp list` — you should see `hyprland: ✓ Connected`.
+</details>
 
 ## Tools (27)
 
