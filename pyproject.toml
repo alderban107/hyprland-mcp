@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hyprland-mcp"
+version = "0.1.0"
+description = "MCP server for Hyprland desktop automation — screenshots, input, window management"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]",
+    "Pillow",
+    "pytesseract",
+]
+
+[project.scripts]
+hyprland-mcp = "hyprland_mcp.server:main"
